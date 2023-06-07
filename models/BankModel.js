@@ -7,24 +7,24 @@ const questionSchema = mongoose.Schema(
             required: true,
             unique: false,
         },
-        ques1: {
+        ans1: {
             type: String,
             required: true,
             unique: false,
         },
 
-        ques2: {
+        ans2: {
             type: String,
             required: true,
             unique: false,
         },
 
-        ques3: {
+        ans3: {
             type: String,
             required: true,
             unique: false,
         },
-        ques4: {
+        ans4: {
             type: String,
             required: true,
             unique: false,
