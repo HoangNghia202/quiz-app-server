@@ -42,7 +42,7 @@ export const login = async (req, res) => {
         delete user.password;
         return res
             .status(200)
-            .json({ ...user, token, message: "Login successful" });
+            .json({ user, token, message: "Login successful" });
     } catch (error) {
         console.error("error>>>", error.message);
         return res.status(500).json(error);

@@ -15,16 +15,12 @@ app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("dev"));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.get("/", (req, res) => {
-    return res
-        .status(200)
-        .send(
-            "<h1>Server is running</h1><p>Go to <a href='http://localhost:5000/api'>http://localhost:5000/api</a></p>"
-        );
+    return res.status(200).send("<h1>Server is running</h1>");
 });
 
 app.use("/", authRouter);
