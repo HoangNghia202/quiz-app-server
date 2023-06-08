@@ -18,14 +18,19 @@ export const addAccessedUser = async (req, res) => {
     try {
         let { bankId, userId } = req.params;
         const bank = await BankModel.findById(bankId);
-        if (!bank.accessedUsers.includes(userId)) {
-            bank.accessedUsers.push(userId);
+        if (!bank.usersAccessed.includes(userId)) {
+            bank.usersAccessed.push(userId);
+            await bank.save();
+            return res.status(200).json({
+                message: "Accessed user added successfully",
+                data: bank,
+            });
+        } else {
+            return res.status(400).json({
+                message: "user already accessed",
+                data: bank,
+            });
         }
-        await bank.save();
-        return res.status(200).json({
-            message: "Accessed user added successfully",
-            data: bank,
-        });
     } catch (err) {
         console.log("err add accessed user>>>", err.message);
         return res.status(404).json({ message: "Accessed user added failed" });
