@@ -17,9 +17,17 @@ export const register = async (req, res) => {
         if (userExist) {
             return res.status(400).json({ message: "User already exist" });
         }
-        const newUser = await UserModel.create(req.body);
+        const newUser = await UserModel.create({
+            firstName,
+            lastName,
+            email,
+            password: hashedPassword,
+        });
         // const saveUser = await newUser.save();
-        return res.status(201).json(newUser);
+        return res.status(201).json({
+            user: newUser,
+            message: "User created successfully",
+        });
     } catch (error) {
         console.error("error>>>", error.message);
         return res.status(500).json(error);
